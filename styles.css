@@ -43,8 +43,6 @@ body {
 
 .grid-container > div:not(.flex-container) {
     padding: 20px;
-    word-wrap: break-word;
-    word-break: break-all;
     background-color: #d9f7fc;
     color: #1f1f1f;
     font-size: 2rem;
