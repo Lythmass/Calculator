@@ -3,23 +3,31 @@
 <head>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Lythmass Calc</title>
+     <title>Lythmass Calculator</title>
+     <!-- Link to CSS -->
      <link rel="stylesheet" href="styles.css">
+
+     <!-- Link to Google Fonts -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@300;400&family=Praise&family=Roboto:wght@500&family=Viga&display=swap" rel="stylesheet">
 </head>
 
 <body>
+     <!-- Calculator Setup -->
      <div class="grid-container">
+
+          <!-- Calculator Screen -->
           <div class="flex-container">
-               <div class="current-output">
+               <div class="text-field">
                     0
                </div>
-               <div class="previous-output">
+               <div class="output">
                     0
                </div>
           </div>
+
+          <!-- Calculator Buttons -->
           <div class = "clear" style = "padding: 20px 10px;">CA</div>
           <div class = "del">DEL</div>
           <div class = "equals">=</div>
@@ -38,6 +46,7 @@
           <div class = "mult">x</div>
           <div class="divide">÷</div>
      </div>
+     
      <script src = "index.js"></script>
 </body>
 

@@ -10,30 +10,8 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.flex-container {
-     display: flex;
-     color: white;
-     align-items: flex-end;
-     justify-content: space-around;
-     flex-direction: column-reverse;
-     word-wrap: break-word;
-     word-break: break-all;
-     background-color: black;
-     opacity: 0.5;
-     grid-column: span 4;
-     padding: 20px 10px;
-}
-.previous-output {
-     text-align: right;
-     width: 230px;
-     font-size: 1.125rem;
-}
-.current-output {
-     text-align: right;
-     width: 230px;
-     font-size: 2rem;
-}
 
+/* Calculator, not screen */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, auto);
@@ -41,11 +19,12 @@ body {
     align-content: center;
 }
 
+/* Calculator Buttons */
 .grid-container > div:not(.flex-container) {
     padding: 20px;
     background-color: #d9f7fc;
     color: #1f1f1f;
-    font-size: 2rem;
+    font-size: 2.5rem;
     border: 1px solid white;
     cursor: pointer;
     text-align: center;
@@ -55,14 +34,14 @@ body {
     opacity: 0.75;
     transition: all 0.25s linear;
 }
-
+/* Calculator Buttons Before Effect */
 .grid-container > div:not(.flex-container)::before {
      content: "";
      position: absolute;
      left: 0;
      top: 100%;
      width: 100%; height: 100%;
-     background-color: #c2e9ff;
+     background-color: white;
      z-index: -1;
      transition: all 0.25s ease;
 }
@@ -77,4 +56,47 @@ body {
 
 .zero {
      grid-column: span 3;
+}
+
+/* Calculator Screen */
+.flex-container {
+     display: flex;
+     color: white;
+     align-items: flex-end;
+     justify-content: space-around;
+     flex-direction: column-reverse;
+     word-wrap: break-word;
+     word-break: break-all;
+     background-color: black;
+     opacity: 0.5;
+     grid-column: span 4;
+     padding: 20px 10px;
+}
+
+.output {
+     text-align: right;
+     width: 230px;
+     font-size: 1.25rem;
+}
+
+.text-field {
+     text-align: right;
+     width: 230px;
+     font-size: 2.25rem;
+}
+
+@media (max-height: 1367px) and (min-height: 1024px) {
+
+     .grid-container > div:not(.flex-container) {
+          padding: 30px;
+          font-size: 4rem;
+     }
+
+     .text-field {
+          font-size: 3rem;
+     }
+     
+     .output {
+          font-size: 1.75rem;
+     }
 }

@@ -1,11 +1,6 @@
 const numButtons = document.querySelectorAll(".grid-container > div");
-const output = document.querySelector(".previous-output");
-const textField = document.querySelector(".current-output");
-
-let number = 0;
-let currentNum = '';
-let operatorEntered = '';
-let previousNum = 0;
+const output = document.querySelector(".output");
+const textField = document.querySelector(".text-field");
 
 const operators = {
      "plus": '+',
@@ -13,12 +8,13 @@ const operators = {
      "mult": '*',
      "divide": '/'
 }
+
 let calculate = '';
-let clickedOperator = '';
+
 //When Clicked any button
 numButtons.forEach(function(numButton) {
      numButton.addEventListener("click", function() {
-          //Check if user clicked any button
+          //Check if user clicked any integer
           if(this.className[0]*1 + 10 >= 10) {
                addNum(this.className[0]);
           } else {
@@ -30,12 +26,16 @@ numButtons.forEach(function(numButton) {
 
                //if the user clicked an operator symbol
                for(var i = 0; i < 4; i++) {
-                    if(this.className == Object.keys(operators)[i]) calculate = calculate + Object.values(operators)[i];
+                    if(this.className == Object.keys(operators)[i] && Object.values(operators)[i] != calculate[calculate.length - 1]) calculate = calculate + Object.values(operators)[i];
                }
           }
+
+          //With these lines, when all numbers get cleared from textfield, zero will stay
           if(this.className != "clear" && this.className != "del") {
                textField.innerText = calculate;
           }
+
+          //If the user clicked equals button
           if(this.className == "equals") {
                textField.innerText = output.innerText;
                calculate = output.innerText;
@@ -52,12 +52,12 @@ function addNum(clickedButton) {
 //Delete a single integer
 function deleteOne() {
      calculate = calculate.substring(0, calculate.length - 1);
-     if(calculate[calculate.length -1]*1 + 10 >= 10) {
-          output.innerText = eval(calculate);
-     }
+     if(calculate[calculate.length -1]*1 + 10 >= 10) output.innerText = eval(calculate);
+
      textField.innerText = textField.innerText.substring(0, textField.innerText.length - 1);
      if(textField.innerText.length == 0) {
-          textField.innerText = '0'; output.innerText = '0';
+          textField.innerText = '0';
+          output.innerText = '0';
      }
 }
 
