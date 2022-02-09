@@ -5,92 +5,65 @@ const textField = document.querySelector(".current-output");
 let number = 0;
 let currentNum = '';
 let operatorEntered = '';
+let previousNum = 0;
 
 const operators = {
      "plus": '+',
      "minus": '-',
      "mult": '*',
-     "divide": '/',
-     Calculate: function(num1, operator, num2) {
-          return eval(num1 + operator + num2);
-     }
+     "divide": '/'
 }
+let calculate = '';
+let clickedOperator = '';
 //When Clicked any button
 numButtons.forEach(function(numButton) {
      numButton.addEventListener("click", function() {
-          //Check if the button is the integer type
+          //Check if user clicked any button
           if(this.className[0]*1 + 10 >= 10) {
                addNum(this.className[0]);
           } else {
-               //If user clicked clear all button
-               if(this.className == "clear") {
-                    clear();
+               //If the user clicked clear all button
+               if(this.className == "clear") clear();
+
+               //If the user clicked delete button
+               if(this.className == "del") deleteOne();
+
+               //if the user clicked an operator symbol
+               for(var i = 0; i < 4; i++) {
+                    if(this.className == Object.keys(operators)[i]) calculate = calculate + Object.values(operators)[i];
                }
-               //If user clicked delete button
-               if(this.className == "del") {
-                    deleteOne();
-               }
-               if(this.className != "del" && this.className != "clear" && this.className) {
-                    if(output.innerText == '0') {
-                         output.innerText = '';
-                    }
-               }
-               //If user clicked any operator button
-               for(var j = 0; j < 4; j++) {
-                    if(this.className == Object.keys(operators)[j]) {
-                         operatorEntered = Object.keys(operators)[j];
-                         if(operatorEntered == "divide") {
-                              textField.innerText = textField.innerText + " ÷ ";
-                         } else {
-                              textField.innerText = textField.innerText + " " + Object.values(operators)[j] + " ";
-                         }
-                         output.innerText = number;
-                         currentNum = '';
-                    }
-                    if(this.className == "equals") {
-                         textField.innerText = number;
-                         currentNum = '';
-                    }
-               }
+          }
+          if(this.className != "clear" && this.className != "del") {
+               textField.innerText = calculate;
+          }
+          if(this.className == "equals") {
+               textField.innerText = output.innerText;
+               calculate = output.innerText;
           }
      });
 });
 
 //Input Numbers
 function addNum(clickedButton) {
-     if(textField.innerText[0] == '0') {
-          textField.innerText = '';
-     }
-     textField.innerText = textField.innerText + clickedButton;
-     currentNum = currentNum + clickedButton;
-     if(operatorEntered.length != 0) {
-          for(var i = 0; i < 4; i++) {
-               if(Object.keys(operators)[i] == operatorEntered) {
-                    number = operators.Calculate(output.innerText.toString(), Object.values(operators)[i], currentNum);
-                    output.innerText = number;
-               }
-          }
-     } else {
-          number = currentNum;
-     }
-
+     calculate = calculate + clickedButton;
+     output.innerText = eval(calculate);
 }
 
 //Delete a single integer
 function deleteOne() {
+     calculate = calculate.substring(0, calculate.length - 1);
+     if(calculate[calculate.length -1]*1 + 10 >= 10) {
+          output.innerText = eval(calculate);
+     }
      textField.innerText = textField.innerText.substring(0, textField.innerText.length - 1);
-     // output.innerText = output.innerText.substring(0, output.innerText.length - 1);
-     currentNum = currentNum.substring(0, currentNum.length - 1);
      if(textField.innerText.length == 0) {
-          textField.innerText = '0';
+          textField.innerText = '0'; output.innerText = '0';
      }
 }
 
 //Clear Everything
 function clear() {
+     calculate = '';
      textField.innerText = '0';
      output.innerText = '0';
-     number = 0;
-     currentNum = '';
-     operatorEntered = '';
 }
